@@ -1,0 +1,123 @@
+package snakeProject;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayDeque;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Snake extends JPanel {
+	
+	private final int WIDTH = 50;
+	private ArrayDeque<SnakePart> snake = new ArrayDeque<>();
+	private int Offset = 0;
+	
+
+	public static void main(String[] args) {
+		
+		JFrame frame = new JFrame("Snake"); // creation de fenetre
+		frame.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		Snake panel = new Snake();
+		frame.setContentPane(panel); // permet de mettre les contenus
+		frame.setSize(12*50, 12*50); // dimensions fenetre 
+		frame.setResizable(false); // fixe les dimensions de la fenetre
+		frame.setLocationRelativeTo(null); // pour centre la fenetre 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // fermeture fenetre = fermeture prog
+		frame.setVisible(true); // pour afficher la fenetre 
+
+	}
+
+	
+	public Snake(){
+		snake.add(new SnakePart(0, 0, 39));
+		//setBackground(Color.WHITE);
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				
+				while(true) {
+					repaint();
+					try {
+						Thread.sleep(1000/60);
+					} catch (InterruptedException e) {
+						
+						e.printStackTrace();
+					}
+				}//boucle infinie (excution en permanance 60/sec)
+				
+			}
+			
+		}).start(); // multi-threading (multi-execution des taches)
+}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		
+		Offset++;
+		
+		if(Offset == WIDTH) { 
+			Offset =0;
+		}
+		
+		super.paintComponent(g);
+		
+		g.setColor(Color.DARK_GRAY);
+		
+		for(SnakePart p : snake) {
+			
+			if(p.dir == 37 || p.dir == 39) { 
+				
+				g.fillRect(p.x*WIDTH+((p.dir==37)? -Offset:Offset), p.y*WIDTH, WIDTH, WIDTH);
+				
+				}else{
+					g.fillRect(p.x*WIDTH, p.y*WIDTH+((p.dir==38)? -Offset:Offset), WIDTH, WIDTH);
+			}
+			
+		};
+	}
+
+	public void onKeyPressed(int codeKey){
+		
+	}
+	
+	class SnakePart{
+		public int x, y, dir;
+		
+		public SnakePart(int x, int y, int dir) {
+			this.x = x;
+			this.y = y;
+			this.dir = dir;
+		}
+		
+		@Override
+		protected Object clone() throws CloneNotSupportedException {
+			
+			return new SnakePart(x, y, dir);
+		}
+	}
+	
+}
+

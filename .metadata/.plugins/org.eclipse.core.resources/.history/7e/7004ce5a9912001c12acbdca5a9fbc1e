@@ -1,0 +1,18 @@
+package snakeProject;
+
+import javax.swing.JFrame;
+
+public class Snake {
+
+	public static void main(String[] args) {
+		
+		JFrame frame = new JFrame("Snake"); // creation de fenetre
+		frame.setSize(12*50, 12*50); // dimension fenetre 
+		frame.setResizable(false); //
+		frame.setLocationRelativeTo(null); // pour centre la fenetre 
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // fermeture fenetre = fermeture prog
+		frame.setVisible(true); // pour afficher la fenetre 
+
+	}
+
+}

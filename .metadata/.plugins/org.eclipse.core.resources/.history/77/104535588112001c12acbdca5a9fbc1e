@@ -1,0 +1,19 @@
+package ml.boubix.program;
+
+import java.util.Scanner;
+
+public class Sdz1 {
+	//Notre objet scanner
+	
+	Scanner sc = new Scanner(System.in);
+	
+	//Initialisation des variables
+	double aConvertir, Convertit=0;
+	char reponse='', mode='';
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
